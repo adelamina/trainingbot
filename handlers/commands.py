@@ -57,10 +57,6 @@ async def reply_heart(message: Message):
     await message.answer(text="здесь ссылки автора:", reply_markup=avtor_kb)
 
     
-
-
-    
-
 @command_router.message(F.text.lower().contains('о боте'))
 async def reply_heart(message: Message):
     await message.answer(text="Бот для тренировок, который сможет рассчитывать суточную норму калорий, будет напоминать о тренировках, который будет хранить данные о сне и оценивать их.")
@@ -102,12 +98,12 @@ async def reply_heart(message: Message):
 
 
 
-@command_router.message()
-async def echo_message(message: Message) -> None:
-    try:
-        await message.reply(text=message.text)
-    except TypeError:
-        await message.answer("Nice try!")
+# @command_router.message()
+# async def echo_message(message: Message) -> None:
+#     try:
+#         await message.reply(text=message.text)
+#     except TypeError:
+#         await message.answer("Nice try!")
 
 
 

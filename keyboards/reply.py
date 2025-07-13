@@ -9,3 +9,15 @@ keyboard = ReplyKeyboardMarkup(
     ],
     resize_keyboard=True
 )
+
+yes_no_keyboard = ReplyKeyboardMarkup(
+    keyboard=[
+        [KeyboardButton(text="да"),
+        KeyboardButton(text="нет")],
+    ],
+    resize_keyboard=True
+)
+
+
+
+yes_no_keyboard
