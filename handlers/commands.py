@@ -31,6 +31,14 @@ async def send_styles(message: Message):
     await message.answer(text=text, parse_Mode="html")
 
 
+
+
+@command_router.message(F.text.lower().contains('меню'))
+async def command_start_handler(message: Message) -> None:
+    start_message = (f'Главное меню.')
+    await message.answer(text=start_message, reply_markup=menu11_kb)    
+
+
 @command_router.message(Command("menu"))
 async def command_start_handler(message: Message) -> None:
     start_message = (f'Главное меню.')
@@ -40,13 +48,15 @@ async def command_start_handler(message: Message) -> None:
 @command_router.message(Command("start"))
 async def command_start_handler(message: Message) -> None:
     start_message = (f'Здравствуй друг')
-    await message.answer(text=start_message, reply_markup=start_kb)
+    await message.answer(text=start_message, reply_markup=keyboard)
 
 
 @command_router.message(Command("help"))
 async def command_start_handler(message: Message) -> None:
     text = (f"Пропишите /menu чтобы начать")
     await message.answer(text)
+
+
 
 @command_router.message(F.text.lower().contains('помощь'))
 async def reply_heart(message: Message):
