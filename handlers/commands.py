@@ -4,9 +4,9 @@ from aiogram.filters import Command
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram import F
-from keyboards.inline import start_kb, test_kb, avtor_kb, menu11_kb
+from keyboards.inline import start_kb, test_kb, avtor_kb, menu11_kb, aboutbot, helpbot, avtorbot, sleepbot, foodbot, sleeprate, sleeprate6, sleepmenu, sleeprate13, sleeprate18, sleeprate61, taimer11, forfood
 from keyboards.reply import  keyboard
-
+from aiogram.types import FSInputFile
 
 command_router = Router()
 
@@ -35,8 +35,9 @@ async def send_styles(message: Message):
 
 @command_router.message(F.text.lower().contains('меню'))
 async def command_start_handler(message: Message) -> None:
-    start_message = (f'Главное меню.')
-    await message.answer(text=start_message, reply_markup=menu11_kb)    
+    await message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await message.answer_photo(photo=photo, caption='Главное меню', reply_markup=menu11_kb)
 
 
 @command_router.message(Command("menu"))

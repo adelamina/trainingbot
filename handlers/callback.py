@@ -402,29 +402,36 @@ async def handle_button(callback: CallbackQuery):
 
 @callbacks_router.callback_query(F.data == "taimer")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("taimer.jpg")
+    await callback.message.answer_photo(photo=photo, caption="здесь вы можете увидеть таймеры на разное время и использовать их", reply_markup=taimer11)
     await callback.answer()
-    await callback.message.edit_text(text="здесь вы можете увидеть таймеры на разное время и использовать их", reply_markup=taimer11)
-
 
 
 @callbacks_router.callback_query(F.data == "taimer111")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
     await callback.answer("Напоминалка запущена")
-    await asyncio.sleep(1800)
-    await callback.message.edit_text(text="пол часа прошло")
+    await asyncio.sleep(3)
+    photo = FSInputFile("taimer.jpg")
+    await callback.message.answer_photo(photo=photo, caption="пол часа прошло")
 
 @callbacks_router.callback_query(F.data == "taimer222")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
     await callback.answer("Напоминалка запущена")
-    await asyncio.sleep(3600)
-    await callback.message.edit_text(text="час прошел")
+    await asyncio.sleep(6)
+    photo = FSInputFile("taimer.jpg")
+    await callback.message.answer_photo(photo=photo, caption="час прошел")
+
 
 @callbacks_router.callback_query(F.data == "taimer333")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
     await callback.answer("Напоминалка запущена")
-    await asyncio.sleep(7200)
-    await callback.message.answer(text="2 часа прошло")
-
+    await asyncio.sleep(12)
+    photo = FSInputFile("taimer.jpg")
+    await callback.message.answer_photo(photo=photo, caption="2 часа прошло")
 
 
 @callbacks_router.callback_query(F.data == "back116")
