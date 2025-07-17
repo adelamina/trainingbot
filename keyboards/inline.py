@@ -71,7 +71,6 @@ sleepbot = InlineKeyboardMarkup(
 #еда
 foodbot = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text="Анализ", callback_data="food11")],
         [InlineKeyboardButton(text="3000ккал", callback_data="3000k"),
         InlineKeyboardButton(text="1500ккал", callback_data="1500k")],
         [InlineKeyboardButton(text="назад", callback_data="back55")]
@@ -157,9 +156,3 @@ taimer11 = InlineKeyboardMarkup(
     ]
 )
 
-
-taimerback = InlineKeyboardMarkup(
-    inline_keyboard=[
-        [InlineKeyboardButton(text="назад", callback_data="back333")]
-    ]
-)

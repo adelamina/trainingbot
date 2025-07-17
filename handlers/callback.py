@@ -2,7 +2,7 @@ import aiogram
 import asyncio
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
-from keyboards.inline import start_kb, test_kb, avtor_kb, menu11_kb, aboutbot, helpbot, avtorbot, sleepbot, foodbot, sleeprate, sleeprate6, sleepmenu, sleeprate13, sleeprate18, sleeprate61, taimer11, taimerback
+from keyboards.inline import start_kb, test_kb, avtor_kb, menu11_kb, aboutbot, helpbot, avtorbot, sleepbot, foodbot, sleeprate, sleeprate6, sleepmenu, sleeprate13, sleeprate18, sleeprate61, taimer11
 from keyboards.reply import  keyboard
 from aiogram.types import FSInputFile
 callbacks_router = Router()
@@ -33,6 +33,7 @@ async def handle_button(callback: CallbackQuery):
 #главное меню о боте
 @callbacks_router.callback_query(F.data == "about11")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
     photo = FSInputFile("marcicat123.jpg")
     await callback.message.answer_photo(photo=photo, caption="Бот для тренировок, который сможет рассчитывать суточную норму калорий, будет напоминать о тренировках, который будет хранить данные о сне и оценивать их.", reply_markup=aboutbot)
     await callback.answer()
@@ -41,9 +42,11 @@ async def handle_button(callback: CallbackQuery):
 #главное меню информация о разработчике
 @callbacks_router.callback_query(F.data == "adelamina11")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
     photo = FSInputFile("aboutme.jpg")
     await callback.message.answer_photo(photo=photo, caption="здесь будут ссылки автора", reply_markup=avtorbot)
     await callback.answer()
+    
 
 
 #главное меню оценка сна
@@ -56,20 +59,22 @@ async def handle_button(callback: CallbackQuery):
 @callbacks_router.callback_query(F.data == "commands11")
 async def handle_button(callback: CallbackQuery):
     await callback.answer()
-    await callback.message.edit_text(text="все команды:",reply_markup=helpbot)
-
-#главное меню еда
-@callbacks_router.callback_query(F.data == "food11")
-async def handle_button(callback: CallbackQuery):
-    await callback.answer()
-    await callback.message.edit_text(text="помощь с рационом еды", reply_markup=foodbot)
+    await callback.message.edit_text(text="если вы нашли ошибку пишите @adelamina", reply_markup=helpbot)
 
 # о боте назад
 @callbacks_router.callback_query(F.data == "back11")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.edit_text(text="Главное меню.", reply_markup=menu11_kb)
-
+    
+#@callbacks_router.callback_query(F.data == "about11")
+#async def handle_button(callback: CallbackQuery):
+    #await callback.message.delete()
+    #photo = FSInputFile("marcicat123.jpg")
+    #await callback.message.answer_photo(photo=photo, caption="Бот для тренировок, который сможет рассчитывать суточную норму калорий, будет напоминать о тренировках, который будет хранить данные о сне и оценивать их.", reply_markup=aboutbot)
+    #await callback.answer()
 
 #помощь назад
 @callbacks_router.callback_query(F.data == "back22")
@@ -80,9 +85,12 @@ async def handle_button(callback: CallbackQuery):
 
 #автор назад
 @callbacks_router.callback_query(F.data == "back33")
-async def handle_button(callback: CallbackQuery):
+async def handle_button(callback: CallbackQuery): 
+    await callback.message.delete()
     await callback.answer()
-    await callback.message.edit_text(text="Главное меню.", reply_markup=menu11_kb)
+    await callback.message.answer(text="Главное меню.", reply_markup=menu11_kb)
+
+
 
 
 
@@ -321,8 +329,10 @@ async def handle_button(callback: CallbackQuery):
 
 
 
-
-@callbacks_router.callback_query(F.data == "back333")
+@callbacks_router.callback_query(F.data == "back116")
 async def handle_button(callback: CallbackQuery):
     await callback.answer()
-    await callback.message.edit_text(text="здесь вы можете увидеть таймеры на разное время и использовать их", reply_markup=taimer11)
+    await callback.message.edit_text(text="главное меню", reply_markup=menu11_kb)
+
+
+
