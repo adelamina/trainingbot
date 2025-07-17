@@ -2,9 +2,11 @@ import aiogram
 import asyncio
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
-from keyboards.inline import start_kb, test_kb, avtor_kb, menu11_kb, aboutbot, helpbot, avtorbot, sleepbot, foodbot, sleeprate, sleeprate6, sleepmenu, sleeprate13, sleeprate18, sleeprate61, taimer11
+from keyboards.inline import start_kb, test_kb, avtor_kb, menu11_kb, aboutbot, helpbot, avtorbot, sleepbot, foodbot, sleeprate, sleeprate6, sleepmenu, sleeprate13, sleeprate18, sleeprate61, taimer11, forfood
 from keyboards.reply import  keyboard
 from aiogram.types import FSInputFile
+import random
+
 callbacks_router = Router()
 
 
@@ -19,6 +21,7 @@ async def get_query(callback: CallbackQuery):
 async def handle_test(t: CallbackQuery):
     await t.answer("asd")
     await t.message.answer(text="test")
+
 
 
 @callbacks_router.callback_query(F.data == "help")
@@ -52,14 +55,42 @@ async def handle_button(callback: CallbackQuery):
 #главное меню оценка сна
 @callbacks_router.callback_query(F.data == "sleep11")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="оценка времени сна", reply_markup=sleepbot)
     await callback.answer()
-    await callback.message.edit_text(text="оценка времени сна", reply_markup=sleepbot)
+
+
+
 
 #главное меню помощь
 @callbacks_router.callback_query(F.data == "commands11")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("help123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="если вы нашли ошибку пишите @adelamina", reply_markup=helpbot)
     await callback.answer()
-    await callback.message.edit_text(text="если вы нашли ошибку пишите @adelamina", reply_markup=helpbot)
+
+
+
+
+
+
+@callbacks_router.callback_query(F.data == "food11")
+async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("food123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="здесь можно выбрать рационы еды", reply_markup=foodbot)
+    await callback.answer()
+
+@callbacks_router.callback_query(F.data == "back66")
+async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("food123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="здесь можно выбрать рационы еды", reply_markup=foodbot)
+    await callback.answer()
+
+
 
 # о боте назад
 @callbacks_router.callback_query(F.data == "back11")
@@ -69,27 +100,25 @@ async def handle_button(callback: CallbackQuery):
     await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
     
-#@callbacks_router.callback_query(F.data == "about11")
-#async def handle_button(callback: CallbackQuery):
-    #await callback.message.delete()
-    #photo = FSInputFile("marcicat123.jpg")
-    #await callback.message.answer_photo(photo=photo, caption="Бот для тренировок, который сможет рассчитывать суточную норму калорий, будет напоминать о тренировках, который будет хранить данные о сне и оценивать их.", reply_markup=aboutbot)
-    #await callback.answer()
 
 #помощь назад
 @callbacks_router.callback_query(F.data == "back22")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.edit_text(text="Главное меню.", reply_markup=menu11_kb)
+    
 
 
 #автор назад
 @callbacks_router.callback_query(F.data == "back33")
 async def handle_button(callback: CallbackQuery): 
     await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.answer(text="Главное меню.", reply_markup=menu11_kb)
-
+    
 
 
 
@@ -97,19 +126,28 @@ async def handle_button(callback: CallbackQuery):
 #информация о сне назад
 @callbacks_router.callback_query(F.data == "back44")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.edit_text(text="Главное меню.", reply_markup=menu11_kb)
+    
 
 #еда назад
 @callbacks_router.callback_query(F.data == "back55")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.edit_text(text="Главное меню.", reply_markup=menu11_kb)
-
+    
 
 
 @callbacks_router.callback_query(F.data == "3000k")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("food123.jpg")
+
+
     a = random.randint(1, 10)
     if a == 1:
         b = '-Завтрак: Омлет из 3 яиц + 100 г овсянки на молоке + 20 г орехов + чай с мёдом -Перекус: 200 г творога (5%) + 1 банан + 1 ст. л. мёда -Обед: 150 г куриной грудки + 100 г гречки + 200 г овощей + 1 ст. л. оливкового масла -Перекус: 50 г протеина + 2 кусочка цельнозернового хлеба + 30 г арахисовой пасты -Ужин: 150 г лосося + 100 г бурого риса + салат из овощей -Перед сном: 200 мл кефира + 30 г орехов'
@@ -140,14 +178,19 @@ async def handle_button(callback: CallbackQuery):
 
     else:
         b = '-Завтрак: 200 г творога + 50 г овсянки + мёд -Перекус: протеиновый коктейль + банан -Обед: 200 г говядины + 150 г картофеля + овощи  -Перекус: 6 яичных белков + авокадо  -Ужин: 200 г курицы + 100 г гречки -На ночь: казеин + орехи'
+    await callback.message.answer_photo(photo=photo, caption=b, reply_markup=forfood)
     await callback.answer()
-    await callback.message.edit_text(text=b, reply_markup=forfood)
+
 
 
 
 
 @callbacks_router.callback_query(F.data == "1500k")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+
+
     a = random.randint(1, 10)
     if a == 1:
         b = '-Завтрак: Овсянка на воде + 1 яйцо + 10 г орехов (300 ккал) -Перекус: 100 г творога + огурец (150 ккал) -Обед: 100 г куриной грудки + 50 г гречки + салат из капусты (400 ккал) -Перекус: Яблоко + 10 г арахисовой пасты (200 ккал) -Ужин: 150 г запеченной рыбы + 100 г брокколи (350 ккал) -На ночь: Стакан кефира 1% (100 ккал)  '
@@ -178,117 +221,168 @@ async def handle_button(callback: CallbackQuery):
 
     else:
         b = ' -Обед: 150 г говядины + гречка + овощи (700 ккал) -Ужин: Лосось + авокадо + орехи (800 ккал)'
+    await callback.message.answer_photo(photo=photo, caption=b, reply_markup=forfood)
     await callback.answer()
-    await callback.message.edit_text(text=b, reply_markup=forfood)
+
 
 
 #вам от 61+
 @callbacks_router.callback_query(F.data == "sleeprate44")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep22.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Сколько вы спали?", reply_markup=sleeprate61)
     await callback.answer()
-    await callback.message.edit_text(text="Сколько вы спали?", reply_markup=sleeprate61)
 
 #вам от 6-12
 @callbacks_router.callback_query(F.data == "sleeprate11")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep33.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Сколько вы спали?", reply_markup=sleeprate6)
     await callback.answer()
-    await callback.message.edit_text(text="Сколько вы спали?", reply_markup=sleeprate6)
+
+
 
 #вам  6 - 12 вы поспали норму
 @callbacks_router.callback_query(F.data == "sleeprate111")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep33.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
+
+
+
 #вам  6 - 12 вы недоспаспали норму
 @callbacks_router.callback_query(F.data == "sleeprate333")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep33.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Вы недоспали норму! Иеальный сон для вашего возвраста 9 - 12 часов", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Вы недоспали норму! Иеальный сон для вашего возвраста 9 - 12 часов", reply_markup=sleepmenu)
+
 
 #вам  6 - 12 вы переспаспали норму
 @callbacks_router.callback_query(F.data == "sleeprate222")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep33.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Спите чуть меньше, идеальный сон для вашего возвраста 9 - 12 часов ", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Спите чуть меньше, идеальный сон для вашего возвраста 9 - 12 часов ", reply_markup=sleepmenu)
+
 
 #назд после всех снов
 @callbacks_router.callback_query(F.data == "menu99")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.edit_text(text="Главное меню.", reply_markup=menu11_kb)
 
 #вам от 13 - 17
 @callbacks_router.callback_query(F.data == "sleeprate22")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Сколько вы спали?", reply_markup=sleeprate13)
     await callback.answer()
-    await callback.message.edit_text(text="Сколько вы спали?", reply_markup=sleeprate13)
 
 #вам от 18 - 60
 @callbacks_router.callback_query(F.data == "sleeprate33")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Сколько вы спали?", reply_markup=sleeprate18)
     await callback.answer()
-    await callback.message.edit_text(text="Сколько вы спали?", reply_markup=sleeprate18)
+
 
 #кнопка назад оценка сна
 @callbacks_router.callback_query(F.data == "back77")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="оценка времени сна", reply_markup=sleepbot)
     await callback.answer()
-    await callback.message.edit_text(text="оценка времени сна", reply_markup=sleepbot)
-
 #виджет анализ сна
 @callbacks_router.callback_query(F.data == "sleeptime")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="сколько вам лет", reply_markup=sleeprate)
     await callback.answer()
-    await callback.message.edit_text(text="сколько вам лет", reply_markup=sleeprate)
+
 #13 - 18
 @callbacks_router.callback_query(F.data == "sleeprate1111")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
+    
 #13 - 18
 @callbacks_router.callback_query(F.data == "sleeprate3333")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Вы недоспали норму! Иеальный сон для вашего возвраста 8 - 10 часов", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Вы недоспали норму! Иеальный сон для вашего возвраста 8 - 10 часов", reply_markup=sleepmenu)
 #13 - 18
 @callbacks_router.callback_query(F.data == "sleeprate2222")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Спите чуть меньше, идеальный сон для вашего возвраста 8 - 10 часов ", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Спите чуть меньше, идеальный сон для вашего возвраста 8 - 10 часов ", reply_markup=sleepmenu)
 
 
 #18 - 60
 @callbacks_router.callback_query(F.data == "sleeprate444")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
 #18 - 60
 @callbacks_router.callback_query(F.data == "sleeprate666")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Вы недоспали норму! Иеальный сон для вашего возвраста 7 - 9 часов", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Вы недоспали норму! Иеальный сон для вашего возвраста 7 - 9 часов", reply_markup=sleepmenu)
 #18 - 60
 @callbacks_router.callback_query(F.data == "sleeprate555")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Спите чуть меньше, идеальный сон для вашего возвраста 7 - 9 часов ", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Спите чуть меньше, идеальный сон для вашего возвраста 7 - 9 часов ", reply_markup=sleepmenu)
+
 
 
 #61
 @callbacks_router.callback_query(F.data == "sleeprate777")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Ваш сон идеален! Продолжайте в том же духе", reply_markup=sleepmenu)
 #61
 @callbacks_router.callback_query(F.data == "sleeprate999")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep22.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Вы недоспали норму! Иеальный сон для вашего возвраста 7 - 8 часов", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Вы недоспали норму! Иеальный сон для вашего возвраста 7 - 8 часов", reply_markup=sleepmenu)
+
 #61
 @callbacks_router.callback_query(F.data == "sleeprate888")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("sleep22.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Спите чуть меньше, идеальный сон для вашего возвраста 7 - 8 часов ", reply_markup=sleepmenu)
     await callback.answer()
-    await callback.message.edit_text(text="Спите чуть меньше, идеальный сон для вашего возвраста 7 - 8 часов ", reply_markup=sleepmenu)
+
 
 
 
@@ -296,8 +390,12 @@ async def handle_button(callback: CallbackQuery):
 
 @callbacks_router.callback_query(F.data == "back88")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="сколько вам лет", reply_markup=sleeprate)
     await callback.answer()
-    await callback.message.edit_text(text="сколько вам лет", reply_markup=sleeprate)
+
+
 
 
 
@@ -331,8 +429,31 @@ async def handle_button(callback: CallbackQuery):
 
 @callbacks_router.callback_query(F.data == "back116")
 async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("robot123.jpg")
+    await callback.message.answer_photo(photo=photo, caption="Главное меню.", reply_markup=menu11_kb)
     await callback.answer()
-    await callback.message.edit_text(text="главное меню", reply_markup=menu11_kb)
 
 
 
+
+@callbacks_router.callback_query(F.data == "back222")
+async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="сколько вам лет.", reply_markup=sleeprate)
+    await callback.answer()
+
+@callbacks_router.callback_query(F.data == "back999")
+async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="сколько вам лет.", reply_markup=sleeprate)
+    await callback.answer()
+
+@callbacks_router.callback_query(F.data == "back111")
+async def handle_button(callback: CallbackQuery):
+    await callback.message.delete()
+    photo = FSInputFile("spit11.jpg")
+    await callback.message.answer_photo(photo=photo, caption="сколько вам лет.", reply_markup=sleeprate)
+    await callback.answer()
