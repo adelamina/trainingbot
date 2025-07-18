@@ -33,7 +33,7 @@ dp.message.middleware(AntiFloodMiddleware())
 
 
 async def main():
-    bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    bot = Bot(token=TOKEN)
     await dp.start_polling(bot)
     
 
